@@ -1,5 +1,5 @@
-﻿using Tenray.ZoneTree;
-using Tenray.ZoneTree.AbstractFileStream;
+﻿using ZoneTree;
+using ZoneTree.AbstractFileStream;
 
 namespace ZoneTree.FullTextSearch;
 

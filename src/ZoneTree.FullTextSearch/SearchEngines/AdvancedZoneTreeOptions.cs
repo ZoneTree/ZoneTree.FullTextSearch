@@ -1,6 +1,6 @@
-﻿using Tenray.ZoneTree;
+﻿using ZoneTree;
 using ZoneTree.FullTextSearch.Model;
-using Tenray.ZoneTree.AbstractFileStream;
+using ZoneTree.AbstractFileStream;
 
 namespace ZoneTree.FullTextSearch.SearchEngines;
 

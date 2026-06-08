@@ -1,4 +1,4 @@
-﻿using Tenray.ZoneTree.Comparers;
+﻿using ZoneTree.Comparers;
 
 namespace ZoneTree.FullTextSearch.Model;
 

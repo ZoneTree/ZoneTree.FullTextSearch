@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using Tenray.ZoneTree;
-using Tenray.ZoneTree.Comparers;
-using Tenray.ZoneTree.Core;
+using ZoneTree;
+using ZoneTree.Comparers;
+using ZoneTree.Core;
 using ZoneTree.FullTextSearch;
 using ZoneTree.FullTextSearch.Index;
 using ZoneTree.FullTextSearch.QueryLanguage;
@@ -11,7 +11,7 @@ using ZoneTree.FullTextSearch.Tokenizer;
 using ZoneTree.FullTextSearch.Hashing;
 using System.Security.Cryptography;
 using ZoneTree.FullTextSearch.Model;
-using Tenray.ZoneTree.AbstractFileStream;
+using ZoneTree.AbstractFileStream;
 
 namespace ZoneTree.FullTextSearch.SearchEngines;
 

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
-using Tenray.ZoneTree;
-using Tenray.ZoneTree.Comparers;
+using ZoneTree;
+using ZoneTree.Comparers;
 using ZoneTree.FullTextSearch.Index;
 
 namespace ZoneTree.FullTextSearch.Search;

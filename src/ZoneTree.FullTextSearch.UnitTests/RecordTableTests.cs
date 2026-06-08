@@ -1,4 +1,4 @@
-using Tenray.ZoneTree.Exceptions;
+using ZoneTree.Exceptions;
 
 namespace ZoneTree.FullTextSearch.UnitTests;
 
