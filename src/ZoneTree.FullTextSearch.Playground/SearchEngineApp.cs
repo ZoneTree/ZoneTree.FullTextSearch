@@ -218,28 +218,28 @@ public sealed class SearchEngineApp : IDisposable
       var iteratorTask = folderIterator.IterateAll(
               (path) =>
               {
-              if (cancellationTokenSource.IsCancellationRequested)
-                return Task.CompletedTask;
-              return Task.Run(async () =>
-                  {
-                  try
-                  {
-                    if (cancellationTokenSource.IsCancellationRequested) return;
-                    if (!RecordTable.TryGetRecord(path, out var record))
-                      record = Interlocked.Increment(ref nextRecord);
+                if (cancellationTokenSource.IsCancellationRequested)
+                  return Task.CompletedTask;
+                return Task.Run(async () =>
+                    {
+                      try
+                      {
+                        if (cancellationTokenSource.IsCancellationRequested) return;
+                        if (!RecordTable.TryGetRecord(path, out var record))
+                          record = Interlocked.Increment(ref nextRecord);
 
-                    var text = await File.ReadAllTextAsync(path);
-                    RecordTable.UpsertRecord(record, path);
-                    SearchEngine.AddRecord(record, text);
-                    Interlocked.Increment(ref totalRecordUpserted);
-                  }
-                  catch (Exception ex)
-                  {
-                    Console.WriteLine(ex.ToString());
-                    throw;
-                  }
-                });
-            },
+                        var text = await File.ReadAllTextAsync(path);
+                        RecordTable.UpsertRecord(record, path);
+                        SearchEngine.AddRecord(record, text);
+                        Interlocked.Increment(ref totalRecordUpserted);
+                      }
+                      catch (Exception ex)
+                      {
+                        Console.WriteLine(ex.ToString());
+                        throw;
+                      }
+                    });
+              },
               cancellationTokenSource.Token);
       iteratorTask.Wait();
       sw.Stop();

@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace ZoneTree.FullTextSearch.Model;
 
@@ -8,7 +8,7 @@ namespace ZoneTree.FullTextSearch.Model;
 /// 4-character sequences using a packed memory layout.
 /// </summary>
 [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode, Pack = 1, Size = 8)]
-public struct NGramToken4
+public struct NGramToken4 : IEquatable<NGramToken4>
 {
   /// <summary>
   /// The raw data representing the 4-character n-gram as a 64-bit unsigned integer.
@@ -43,12 +43,17 @@ public struct NGramToken4
 
   public override bool Equals(object obj)
   {
-    throw new NotImplementedException();
+    return obj is NGramToken4 token && Equals(token);
+  }
+
+  public bool Equals(NGramToken4 other)
+  {
+    return data == other.data;
   }
 
   public override int GetHashCode()
   {
-    throw new NotImplementedException();
+    return data.GetHashCode();
   }
 
   public static bool operator ==(NGramToken4 left, NGramToken4 right)

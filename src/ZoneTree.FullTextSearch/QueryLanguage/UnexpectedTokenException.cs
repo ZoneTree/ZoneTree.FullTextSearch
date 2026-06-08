@@ -1,4 +1,4 @@
-﻿namespace ZoneTree.FullTextSearch.QueryLanguage;
+namespace ZoneTree.FullTextSearch.QueryLanguage;
 
 /// <summary>
 /// Exception thrown when an unexpected token is encountered during parsing.
@@ -17,7 +17,8 @@ public sealed class UnexpectedTokenException : Exception
   {
   }
 
-  public UnexpectedTokenException()
+
+  public UnexpectedTokenException(string message, Exception innerException) : base(message, innerException)
   {
   }
 }

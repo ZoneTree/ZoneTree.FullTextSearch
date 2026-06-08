@@ -1,4 +1,4 @@
-﻿namespace ZoneTree.FullTextSearch.Misc;
+namespace ZoneTree.FullTextSearch.Misc;
 
 /// <summary>
 /// Provides functionality to iterate through files in a specified directory based on a search pattern,
@@ -57,16 +57,10 @@ public sealed class FolderIterator
         {
           Console.WriteLine("Cancelled the folder iteration.");
           break;
-        
-<<<<<<< TODO: Unmerged change from project 'ZoneTree.FullTextSearch(net9.0)', Before:
-            await Task.WhenAll(tasks.ToArray());
-=======
-            await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
->>>>>>> After
-}
+        }
         tasks.Add(callback(path));
       }
-      await Task.WhenAll(tasks.ToArray()).ConfigureAwait(false);
-    }).ConfigureAwait(false).ConfigureAwait(false);
+      await Task.WhenAll([.. tasks]).ConfigureAwait(false);
+    }, cancellationToken).ConfigureAwait(false);
   }
 }
