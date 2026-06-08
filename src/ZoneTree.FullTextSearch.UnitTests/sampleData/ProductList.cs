@@ -1,46 +1,46 @@
-﻿namespace ZoneTree.FullTextSearch.UnitTests.sampleData;
+namespace ZoneTree.FullTextSearch.UnitTests.sampleData;
 
 public sealed class Product
 {
-    public long Id { get; set; }
-    public string Name { get; set; }
-    public string Category { get; set; }
-    public decimal Price { get; set; }
-    public string Brand { get; set; }
-    public double Rating { get; set; }
-    public Facets Facets { get; set; }
-    public string Description { get; set; }
+  public long Id { get; set; }
+  public string Name { get; set; }
+  public string Category { get; set; }
+  public decimal Price { get; set; }
+  public string Brand { get; set; }
+  public double Rating { get; set; }
+  public Facets Facets { get; set; }
+  public string Description { get; set; }
 
-    public override string ToString()
-    {
-        return $"Product: {Id} {Name} {Category} {Price} {Brand} {Rating} {Description}";
-    }
+  public override string ToString()
+  {
+    return $"Product: {Id} {Name} {Category} {Price} {Brand} {Rating} {Description}";
+  }
 }
 
 public sealed class Facets
 {
-    public string Color { get; set; }
-    public string Connectivity { get; set; }
-    public string BatteryLife { get; set; }
-    public string[] Features { get; set; }
-    public string ScreenSize { get; set; }
-    public string Resolution { get; set; }
-    public string[] SmartFeatures { get; set; }
-    public string[] Ports { get; set; }
-    public string Capacity { get; set; }
-    public string EnergyEfficiency { get; set; }
-    public string Processor { get; set; }
-    public string Ram { get; set; }
-    public string Storage { get; set; }
-    public string GraphicsCard { get; set; }
-    public string Pressure { get; set; }
+  public string Color { get; set; }
+  public string Connectivity { get; set; }
+  public string BatteryLife { get; set; }
+  public string[] Features { get; set; }
+  public string ScreenSize { get; set; }
+  public string Resolution { get; set; }
+  public string[] SmartFeatures { get; set; }
+  public string[] Ports { get; set; }
+  public string Capacity { get; set; }
+  public string EnergyEfficiency { get; set; }
+  public string Processor { get; set; }
+  public string Ram { get; set; }
+  public string Storage { get; set; }
+  public string GraphicsCard { get; set; }
+  public string Pressure { get; set; }
 }
 
 public static class ProductList
 {
-    public static Product[] Products =
-    [
-        new Product
+  public static Product[] Products =
+  [
+      new Product
         {
             Id = 1,
             Name = "Wireless Noise Cancelling Headphones",

@@ -10,34 +10,54 @@ namespace ZoneTree.FullTextSearch.Model;
 [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode, Pack = 1, Size = 8)]
 public struct NGramToken4
 {
-    /// <summary>
-    /// The raw data representing the 4-character n-gram as a 64-bit unsigned integer.
-    /// This field overlaps with the individual character fields.
-    /// </summary>
-    [FieldOffset(0)]
-    public ulong data;
+  /// <summary>
+  /// The raw data representing the 4-character n-gram as a 64-bit unsigned integer.
+  /// This field overlaps with the individual character fields.
+  /// </summary>
+  [FieldOffset(0)]
+  public ulong data;
 
-    /// <summary>
-    /// The first character of the 4-character n-gram.
-    /// </summary>
-    [FieldOffset(0)]
-    public char c0;
+  /// <summary>
+  /// The first character of the 4-character n-gram.
+  /// </summary>
+  [FieldOffset(0)]
+  public char c0;
 
-    /// <summary>
-    /// The second character of the 4-character n-gram.
-    /// </summary>
-    [FieldOffset(2)]
-    public char c1;
+  /// <summary>
+  /// The second character of the 4-character n-gram.
+  /// </summary>
+  [FieldOffset(2)]
+  public char c1;
 
-    /// <summary>
-    /// The third character of the 4-character n-gram.
-    /// </summary>
-    [FieldOffset(4)]
-    public char c3;
+  /// <summary>
+  /// The third character of the 4-character n-gram.
+  /// </summary>
+  [FieldOffset(4)]
+  public char c3;
 
-    /// <summary>
-    /// The fourth character of the 4-character n-gram.
-    /// </summary>
-    [FieldOffset(6)]
-    public char c4;
+  /// <summary>
+  /// The fourth character of the 4-character n-gram.
+  /// </summary>
+  [FieldOffset(6)]
+  public char c4;
+
+  public override bool Equals(object obj)
+  {
+    throw new NotImplementedException();
+  }
+
+  public override int GetHashCode()
+  {
+    throw new NotImplementedException();
+  }
+
+  public static bool operator ==(NGramToken4 left, NGramToken4 right)
+  {
+    return left.Equals(right);
+  }
+
+  public static bool operator !=(NGramToken4 left, NGramToken4 right)
+  {
+    return !(left == right);
+  }
 }

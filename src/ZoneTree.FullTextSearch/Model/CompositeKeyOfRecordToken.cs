@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace ZoneTree.FullTextSearch.Model;
 
@@ -15,40 +15,40 @@ public struct CompositeKeyOfRecordToken<TRecord, TToken>
     where TRecord : unmanaged
     where TToken : unmanaged
 {
-    /// <summary>
-    /// The record component of the composite key. This part of the key identifies the specific record.
-    /// </summary>
-    public TRecord Record;
+  /// <summary>
+  /// The record component of the composite key. This part of the key identifies the specific record.
+  /// </summary>
+  public TRecord Record;
 
-    /// <summary>
-    /// The token component of the composite key. This part of the key represents the token
-    /// associated with the record, used to differentiate records or to index them based on the token.
-    /// </summary>
-    public TToken Token;
+  /// <summary>
+  /// The token component of the composite key. This part of the key represents the token
+  /// associated with the record, used to differentiate records or to index them based on the token.
+  /// </summary>
+  public TToken Token;
 
-    public override bool Equals(object obj)
-    {
-        return obj is CompositeKeyOfRecordToken<TRecord, TToken> token && Equals(token);
-    }
+  public override bool Equals(object obj)
+  {
+    return obj is CompositeKeyOfRecordToken<TRecord, TToken> token && Equals(token);
+  }
 
-    public bool Equals(CompositeKeyOfRecordToken<TRecord, TToken> other)
-    {
-        return EqualityComparer<TRecord>.Default.Equals(Record, other.Record) &&
-               EqualityComparer<TToken>.Default.Equals(Token, other.Token);
-    }
+  public bool Equals(CompositeKeyOfRecordToken<TRecord, TToken> other)
+  {
+    return EqualityComparer<TRecord>.Default.Equals(Record, other.Record) &&
+           EqualityComparer<TToken>.Default.Equals(Token, other.Token);
+  }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Record, Token);
-    }
+  public override int GetHashCode()
+  {
+    return HashCode.Combine(Record, Token);
+  }
 
-    public static bool operator ==(CompositeKeyOfRecordToken<TRecord, TToken> left, CompositeKeyOfRecordToken<TRecord, TToken> right)
-    {
-        return left.Equals(right);
-    }
+  public static bool operator ==(CompositeKeyOfRecordToken<TRecord, TToken> left, CompositeKeyOfRecordToken<TRecord, TToken> right)
+  {
+    return left.Equals(right);
+  }
 
-    public static bool operator !=(CompositeKeyOfRecordToken<TRecord, TToken> left, CompositeKeyOfRecordToken<TRecord, TToken> right)
-    {
-        return !(left == right);
-    }
+  public static bool operator !=(CompositeKeyOfRecordToken<TRecord, TToken> left, CompositeKeyOfRecordToken<TRecord, TToken> right)
+  {
+    return !(left == right);
+  }
 }

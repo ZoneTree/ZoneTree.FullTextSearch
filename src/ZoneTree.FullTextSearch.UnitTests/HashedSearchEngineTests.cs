@@ -5,133 +5,133 @@ namespace ZoneTree.FullTextSearch.UnitTests;
 
 public sealed class HashedSearchEngineTests
 {
-    [Test]
-    public void AddRecord_ShouldAddRecordToIndex()
-    {
-        var dataPath = "data/AddRecord_ShouldAddRecordToIndex";
-        if (Directory.Exists(dataPath))
-            Directory.Delete(dataPath, true);
-        using var searchEngine = new HashedSearchEngine<int>(
-            dataPath);
+  [Test]
+  public void AddRecord_ShouldAddRecordToIndex()
+  {
+    var dataPath = "data/AddRecord_ShouldAddRecordToIndex";
+    if (Directory.Exists(dataPath))
+      Directory.Delete(dataPath, true);
+    using var searchEngine = new HashedSearchEngine<int>(
+        dataPath);
 
-        // Arrange
-        int record = 1;
-        string text = "sample text";
+    // Arrange
+    int record = 1;
+    string text = "sample text";
 
-        // Act
-        searchEngine.AddRecord(record, text);
+    // Act
+    searchEngine.AddRecord(record, text);
 
-        // Assert
-        var searchResult = searchEngine.SimpleSearch("sample");
-        Assert.That(searchResult, Is.Not.Empty);
-        Assert.That(searchResult, Contains.Item(record));
-    }
+    // Assert
+    var searchResult = searchEngine.SimpleSearch("sample");
+    Assert.That(searchResult, Is.Not.Empty);
+    Assert.That(searchResult, Contains.Item(record));
+  }
 
-    [Test]
-    public void DeleteRecord_ShouldRemoveRecordFromIndex()
-    {
-        var dataPath = "data/DeleteRecord_ShouldRemoveRecordFromIndex";
-        if (Directory.Exists(dataPath))
-            Directory.Delete(dataPath, true);
-        using var searchEngine = new HashedSearchEngine<int>(dataPath);
+  [Test]
+  public void DeleteRecord_ShouldRemoveRecordFromIndex()
+  {
+    var dataPath = "data/DeleteRecord_ShouldRemoveRecordFromIndex";
+    if (Directory.Exists(dataPath))
+      Directory.Delete(dataPath, true);
+    using var searchEngine = new HashedSearchEngine<int>(dataPath);
 
-        // Arrange
-        int record = 1;
-        string text = "sample text";
+    // Arrange
+    int record = 1;
+    string text = "sample text";
 
-        // Act
-        searchEngine.AddRecord(record, text);
-        long deletedCount = searchEngine.DeleteRecord(record);
+    // Act
+    searchEngine.AddRecord(record, text);
+    long deletedCount = searchEngine.DeleteRecord(record);
 
-        // Assert
-        Assert.That(deletedCount, Is.EqualTo(2));
-        var searchResult = searchEngine.SimpleSearch("sample");
-        Assert.That(searchResult, Is.Empty);
-    }
+    // Assert
+    Assert.That(deletedCount, Is.EqualTo(2));
+    var searchResult = searchEngine.SimpleSearch("sample");
+    Assert.That(searchResult, Is.Empty);
+  }
 
-    [Test]
-    public void Search_WithRespectTokenOrderTrue_ShouldReturnRecords()
-    {
-        var dataPath = "data/Search_WithRespectTokenOrderTrue_ShouldReturnRecords";
-        if (Directory.Exists(dataPath))
-            Directory.Delete(dataPath, true);
-        using var searchEngine = new HashedSearchEngine<int>(dataPath);
+  [Test]
+  public void Search_WithRespectTokenOrderTrue_ShouldReturnRecords()
+  {
+    var dataPath = "data/Search_WithRespectTokenOrderTrue_ShouldReturnRecords";
+    if (Directory.Exists(dataPath))
+      Directory.Delete(dataPath, true);
+    using var searchEngine = new HashedSearchEngine<int>(dataPath);
 
-        // Arrange
-        int record1 = 1;
-        int record2 = 2;
-        searchEngine.AddRecord(record1, "quick brown fox");
-        searchEngine.AddRecord(record2, "brown fox jumps");
+    // Arrange
+    int record1 = 1;
+    int record2 = 2;
+    searchEngine.AddRecord(record1, "quick brown fox");
+    searchEngine.AddRecord(record2, "brown fox jumps");
 
-        // Act
-        var searchResult = searchEngine.SimpleSearch("brown fox");
+    // Act
+    var searchResult = searchEngine.SimpleSearch("brown fox");
 
-        // Assert
-        Assert.That(searchResult.Length, Is.EqualTo(2));
-        Assert.That(searchResult, Contains.Item(record1));
-        Assert.That(searchResult, Contains.Item(record2));
-    }
+    // Assert
+    Assert.That(searchResult.Length, Is.EqualTo(2));
+    Assert.That(searchResult, Contains.Item(record1));
+    Assert.That(searchResult, Contains.Item(record2));
+  }
 
-    [Test]
-    public void Search_WithRespectTokenOrderFalse_ShouldReturnRecordsRegardlessOfOrder()
-    {
-        var dataPath = "data/Search_WithRespectTokenOrderFalse_ShouldReturnRecordsRegardlessOfOrder";
-        if (Directory.Exists(dataPath))
-            Directory.Delete(dataPath, true);
-        using var searchEngine = new HashedSearchEngine<int>(dataPath);
+  [Test]
+  public void Search_WithRespectTokenOrderFalse_ShouldReturnRecordsRegardlessOfOrder()
+  {
+    var dataPath = "data/Search_WithRespectTokenOrderFalse_ShouldReturnRecordsRegardlessOfOrder";
+    if (Directory.Exists(dataPath))
+      Directory.Delete(dataPath, true);
+    using var searchEngine = new HashedSearchEngine<int>(dataPath);
 
-        // Arrange
-        int record1 = 1;
-        int record2 = 2;
-        searchEngine.AddRecord(record1, "quick brown fox");
-        searchEngine.AddRecord(record2, "fox brown jumps");
+    // Arrange
+    int record1 = 1;
+    int record2 = 2;
+    searchEngine.AddRecord(record1, "quick brown fox");
+    searchEngine.AddRecord(record2, "fox brown jumps");
 
-        // Act
-        var searchResult = searchEngine.SimpleSearch("brown fox", respectTokenOrder: false);
+    // Act
+    var searchResult = searchEngine.SimpleSearch("brown fox", respectTokenOrder: false);
 
-        // Assert
-        Assert.That(searchResult.Length, Is.EqualTo(2));
-        Assert.That(searchResult, Contains.Item(record1));
-        Assert.That(searchResult, Contains.Item(record2));
-    }
+    // Assert
+    Assert.That(searchResult.Length, Is.EqualTo(2));
+    Assert.That(searchResult, Contains.Item(record1));
+    Assert.That(searchResult, Contains.Item(record2));
+  }
 
-    [Test]
-    public void Search_WithSkipAndLimit_ShouldReturnLimitedRecords()
-    {
-        var dataPath = "data/Search_WithSkipAndLimit_ShouldReturnLimitedRecords";
-        if (Directory.Exists(dataPath))
-            Directory.Delete(dataPath, true);
-        using var searchEngine = new HashedSearchEngine<int>(dataPath);
+  [Test]
+  public void Search_WithSkipAndLimit_ShouldReturnLimitedRecords()
+  {
+    var dataPath = "data/Search_WithSkipAndLimit_ShouldReturnLimitedRecords";
+    if (Directory.Exists(dataPath))
+      Directory.Delete(dataPath, true);
+    using var searchEngine = new HashedSearchEngine<int>(dataPath);
 
-        // Arrange
-        searchEngine.AddRecord(1, "record one");
-        searchEngine.AddRecord(2, "record two");
-        searchEngine.AddRecord(3, "record three");
+    // Arrange
+    searchEngine.AddRecord(1, "record one");
+    searchEngine.AddRecord(2, "record two");
+    searchEngine.AddRecord(3, "record three");
 
-        // Act
-        var searchResult = searchEngine.SimpleSearch("record", skip: 1, limit: 1);
+    // Act
+    var searchResult = searchEngine.SimpleSearch("record", skip: 1, limit: 1);
 
-        // Assert
-        Assert.That(searchResult.Length, Is.EqualTo(1));
-        Assert.That(searchResult[0], Is.EqualTo(2));
-    }
+    // Assert
+    Assert.That(searchResult.Length, Is.EqualTo(1));
+    Assert.That(searchResult[0], Is.EqualTo(2));
+  }
 
-    [Test]
-    public void Dispose_ShouldDisposeIndexProperly()
-    {
-        // Arrange
-        var dataPath = "data/Dispose_ShouldDisposeIndexProperly";
-        if (Directory.Exists(dataPath))
-            Directory.Delete(dataPath, true);
+  [Test]
+  public void Dispose_ShouldDisposeIndexProperly()
+  {
+    // Arrange
+    var dataPath = "data/Dispose_ShouldDisposeIndexProperly";
+    if (Directory.Exists(dataPath))
+      Directory.Delete(dataPath, true);
 
-        using var searchEngine = new HashedSearchEngine<int>(dataPath);
-        searchEngine.AddRecord(1, "sample");
+    using var searchEngine = new HashedSearchEngine<int>(dataPath);
+    searchEngine.AddRecord(1, "sample");
 
-        // Act        
-        searchEngine.Dispose();
+    // Act        
+    searchEngine.Dispose();
 
-        // Assert
-        Assert.That(searchEngine.Index.IsReadOnly, Is.True);
-        Assert.Throws<ZoneTreeIsReadOnlyException>(() => searchEngine.AddRecord(2, "abc"));
-    }
+    // Assert
+    Assert.That(searchEngine.Index.IsReadOnly, Is.True);
+    Assert.Throws<ZoneTreeIsReadOnlyException>(() => searchEngine.AddRecord(2, "abc"));
+  }
 }

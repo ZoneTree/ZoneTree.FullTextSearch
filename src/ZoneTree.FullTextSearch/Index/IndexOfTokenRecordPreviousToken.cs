@@ -1,4 +1,4 @@
-﻿using ZoneTree.Comparers;
+using ZoneTree.Comparers;
 using ZoneTree.FullTextSearch.Model;
 using ZoneTree.FullTextSearch.Search;
 using ZoneTree.FullTextSearch.SearchEngines;
