@@ -1,4 +1,4 @@
-﻿namespace ZoneTree.FullTextSearch.Search;
+namespace ZoneTree.FullTextSearch.Search;
 
 /// <summary>
 /// Represents the type of a query node, which defines the logical operation
@@ -6,7 +6,7 @@
 /// </summary>
 public enum QueryNodeType
 {
-    Not,
-    And,
-    Or,
+  Not,
+  And,
+  Or,
 }

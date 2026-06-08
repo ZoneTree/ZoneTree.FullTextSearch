@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net8.0;net7.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <NeutralLanguage>en-US</NeutralLanguage>
     <RepositoryUrl>https://github.com/koculu/ZoneTree.FullTextSearch</RepositoryUrl>
@@ -34,11 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ZoneTree" Version="1.8.5" />
+    <PackageReference Include="ZoneTree" Version="1.8.7" />
   </ItemGroup>
 
   <ItemGroup>
