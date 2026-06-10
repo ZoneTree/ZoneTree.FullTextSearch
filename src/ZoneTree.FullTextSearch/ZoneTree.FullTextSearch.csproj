@@ -4,7 +4,7 @@
     <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <RepositoryUrl>https://github.com/koculu/ZoneTree.FullTextSearch</RepositoryUrl>
+    <RepositoryUrl>https://github.com/ZoneTree/ZoneTree.FullTextSearch</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README-NUGET.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
