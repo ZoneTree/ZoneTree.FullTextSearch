@@ -15,9 +15,9 @@
     </Summmary>
     <PackageTags>full-text search, search engine, embedded search, ZoneTree, indexing, dual-key storage, high performance, C#, .NET, open source, data indexing, full-text indexing, search library, unmanaged types, data retrieval</PackageTags>
     <ReleaseNotes></ReleaseNotes>
-    <Company>koculu</Company>
+    <Company>ZoneTree</Company>
 
-    <PackageProjectUrl>https://github.com/koculu/ZoneTree.FullTextSearch</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/ZoneTree/ZoneTree.FullTextSearch</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
     <AnalysisMode>All</AnalysisMode>
