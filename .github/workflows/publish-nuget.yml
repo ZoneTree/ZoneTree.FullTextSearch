@@ -9,16 +9,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Lets NuGet/login request a GitHub OIDC token.
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: |
+            10.0.x
             9.0.x
             8.0.x
-            7.0.x
-            6.0.x
       - name: Display dotnet version
         run: dotnet --version
       - name: Restore dependencies
@@ -30,8 +32,23 @@ jobs:
       - name: Test
         run: dotnet test --no-build --configuration Release --verbosity normal
         working-directory: ./src
-      - name: Publish the package to nuget.org
-        run: dotnet nuget push ZoneTree.FullTextSearch/bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
+      - name: Pack
+        run: dotnet pack ZoneTree.FullTextSearch/ZoneTree.FullTextSearch.csproj --configuration Release --no-build --output ../artifacts/packages
         working-directory: ./src
+      - name: Upload packages
+        uses: actions/upload-artifact@v7
+        with:
+          name: nuget-packages
+          path: artifacts/packages/
+      # Exchange the OIDC token immediately before publishing for a short-lived API key.
+      # Requires a matching NuGet.org trusted publishing policy created by koculu.
+      - name: NuGet login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: koculu
+      - name: Publish the package to nuget.org
+        # Pushing a .nupkg also pushes the .snupkg symbol package next to it.
+        run: dotnet nuget push "artifacts/packages/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
