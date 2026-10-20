@@ -27,13 +27,14 @@ public sealed class HashedSearchEngineTests
     Assert.That(searchResult, Contains.Item(record));
   }
 
-  [Test]
-  public void DeleteRecord_ShouldRemoveRecordFromIndex()
+  [TestCase(false)]
+  [TestCase(true)]
+  public void DeleteRecord_ShouldRemoveRecordFromIndex(bool useSecondaryIndex)
   {
-    var dataPath = "data/DeleteRecord_ShouldRemoveRecordFromIndex";
+    var dataPath = $"data/DeleteRecord_ShouldRemoveRecordFromIndex_{useSecondaryIndex}";
     if (Directory.Exists(dataPath))
       Directory.Delete(dataPath, true);
-    using var searchEngine = new HashedSearchEngine<int>(dataPath);
+    using var searchEngine = new HashedSearchEngine<int>(dataPath, useSecondaryIndex: useSecondaryIndex);
 
     // Arrange
     int record = 1;

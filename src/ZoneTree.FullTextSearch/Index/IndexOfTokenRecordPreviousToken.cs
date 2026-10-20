@@ -108,8 +108,11 @@ public sealed class IndexOfTokenRecordPreviousToken<TRecord, TToken>
     if (tokenComparer == null)
       tokenComparer = ComponentsForKnownTypes.GetComparer<TToken>();
     var fileStreamProvider = advancedOptions?.FileStreamProvider;
+    // Composite keys support custom comparers, so no compatible Bloom-filter hasher can be assumed.
+    // Advanced factory configurators can supply a hasher and enable the filter explicitly.
     var factory1 = new ZoneTreeFactory<CompositeKeyOfTokenRecordPrevious<TRecord, TToken>, byte>(fileStreamProvider)
         .SetDataDirectory($"{dataPath}/index1")
+        .SetMutableSegmentBloomFilterBitsPerItem(0)
         .SetIsDeletedDelegate(
             (in CompositeKeyOfTokenRecordPrevious<TRecord, TToken> key, in byte value) => value == 1)
         .SetMarkValueDeletedDelegate((ref byte x) => x = 1)
@@ -134,6 +137,7 @@ public sealed class IndexOfTokenRecordPreviousToken<TRecord, TToken>
     {
       var factory2 = new ZoneTreeFactory<CompositeKeyOfRecordToken<TRecord, TToken>, byte>(fileStreamProvider)
           .SetDataDirectory($"{dataPath}/index2")
+          .SetMutableSegmentBloomFilterBitsPerItem(0)
           .SetIsDeletedDelegate(
               (in CompositeKeyOfRecordToken<TRecord, TToken> key, in byte value) => value == 1)
           .SetMarkValueDeletedDelegate((ref byte x) => x = 1)
